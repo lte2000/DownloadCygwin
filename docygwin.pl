@@ -372,6 +372,26 @@ sub genPackageList()
                         last;
                     }
                 }
+                # no path? try [test]
+                if (! $path) {
+                    my $in_test = 0;
+                    for (@lines) {
+                        if (/^\[test\]$/) {
+                            $in_test = 1;
+                            next;
+                        }
+                        if ($in_test && /^install: (\S+)\s+(\S+)\s+(\S+)/) {
+                            print "$package_name use install path in [test].\n";
+                            $path = $1;
+                            $size = $2;
+                            $md5 = $3;
+                            last;
+                        }
+                        if (/^\[.*\]$/) {
+                            $in_test = 0;
+                        }
+                    }
+                }
                 die "ERROR: Can't get package_name $_\n" if ! $package_name;
                 die "ERROR: Can't get path $_\n" if ! $path;
                 ## need declare %x86_packages without my;
