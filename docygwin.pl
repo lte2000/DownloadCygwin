@@ -1,9 +1,5 @@
 #!/usr/bin/perl -w
 
-#-----------------------------------------------------------------
-# Description: core file for DownloadCygwin
-# $Id: docygwin.pl,v 1.2 2011-04-24 04:09:44 jyliu Exp $
-#-----------------------------------------------------------------
 
 use strict;
 use Getopt::Long;
